@@ -1,18 +1,35 @@
-import { Box, Text } from "@chakra-ui/react";
-import { Geist } from "next/font/google";
+import { IBaseParams } from "@/interfaces/IBaseParams";
+import { Box, Button, Heading, Text } from "@chakra-ui/react";
+import { NextPageContext } from "next";
 import { JSX } from "react";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const HomePage: React.FC = (): JSX.Element => {
+interface IProps {
+  params: IBaseParams;
+}
+const HomePage: React.FC<IProps> = ({ params }): JSX.Element => {
+  console.log(params);
   return (
     <Box>
-      <Text>Okelah</Text>
+      <Heading>Logan</Heading>
     </Box>
   );
 };
+
+export async function getServerSideProps(context: NextPageContext) {
+  const { query } = context;
+  const page = query?.page as string;
+  const length = query?.length as string;
+
+  const params: IBaseParams = {
+    length: length ? Number(length) : 1,
+    page: page ? Number(page) : 10,
+  };
+
+  return {
+    props: {
+      params,
+    },
+  };
+}
 
 export default HomePage;

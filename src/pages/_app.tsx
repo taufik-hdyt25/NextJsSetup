@@ -1,12 +1,34 @@
-import "@/styles/globals.css";
-import MyCustomTheme from "@/theme/theme";
+import { NextPage } from "next";
+import { AppProps } from "next/app";
+import Head from "next/head";
+import fonts from "./libraries/fonts";
 import { ChakraProvider } from "@chakra-ui/react";
-import type { AppProps } from "next/app";
+import { MyCustomTheme } from "@/themes";
 
-export default function App({ Component, pageProps }: AppProps) {
-  return (
-    <ChakraProvider theme={MyCustomTheme}>
-      <Component {...pageProps} />
-    </ChakraProvider>
-  );
+interface CustomAppProps extends AppProps {
+  Component: NextPage;
 }
+
+const App: NextPage<CustomAppProps> = ({ Component, pageProps }) => {
+  return (
+    <>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Head>
+      <style jsx global>
+        {`
+          :root {
+            --font-heading: ${fonts.fontHeading.style.fontFamily};
+            --font-body: ${fonts.fontBody.style.fontFamily};
+          }
+        `}
+      </style>
+
+      <ChakraProvider theme={MyCustomTheme}>
+        <Component {...pageProps} />
+      </ChakraProvider>
+    </>
+  );
+};
+
+export default App;

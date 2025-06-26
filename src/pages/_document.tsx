@@ -1,16 +1,34 @@
-import theme from "@/theme/theme";
+import { MyCustomTheme } from "@/themes";
 import { ColorModeScript } from "@chakra-ui/react";
-import { Html, Head, Main, NextScript } from "next/document";
+import Document, {
+  DocumentContext,
+  Head,
+  Html,
+  Main,
+  NextScript,
+} from "next/document";
+import fonts from "./libraries/fonts";
 
-export default function Document() {
-  return (
-    <Html lang="en">
-      <Head />
-      <body>
-        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-        <Main />
-        <NextScript />
-      </body>
-    </Html>
-  );
+class MyDocument extends Document {
+  static async getInitialProps(ctx: DocumentContext) {
+    const initialProps = await Document.getInitialProps(ctx);
+    return { ...initialProps };
+  }
+
+  render() {
+    return (
+      <Html id="html" lang="en">
+        <Head />
+        <main suppressHydrationWarning>
+          <ColorModeScript
+            initialColorMode={MyCustomTheme.config.initialColorMode}
+          />
+          <Main />
+          <NextScript />
+        </main>
+      </Html>
+    );
+  }
 }
+
+export default MyDocument;
