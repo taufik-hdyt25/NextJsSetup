@@ -7,8 +7,6 @@ import Document, {
   Main,
   NextScript,
 } from "next/document";
-import fonts from "./libraries/fonts";
-
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
     const initialProps = await Document.getInitialProps(ctx);
