@@ -9,7 +9,6 @@ import {
 // import { Form } from './components/form';
 // import { FormLabel } from './components/formLabel';
 import { Heading } from "./components/heading";
-// import { Input } from './components/input';
 // import { Link } from './components/link';
 // import { Menu } from './components/menu';
 // import { Modal } from './components/modal';
@@ -21,6 +20,7 @@ import { Text } from "./components/text";
 // import { Textarea } from './components/textarea';
 import foundations from "./foundations";
 import { styles } from "./styles";
+import { Input } from "./components/input";
 
 const config: ThemeConfig = {
   initialColorMode: "light",
@@ -42,7 +42,7 @@ export const MyCustomTheme = extendTheme(
       // Form,
       // FormLabel,
       Heading,
-      // Input,
+      Input,
       // Link,
       // Menu,
       // Modal,
